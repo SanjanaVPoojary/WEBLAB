@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>College Time Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h2 {
+      margin-top: 20px;
+    }
+
+    table {
+      width: 95%;
+      margin: auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 2px double black;
+    }
+
+    th, td {
+      position: relative; /* Needed for z-index and shadow */
+   box-shadow:
+    inset 0 0 0 2px white,  /* Inner white "gap" */
+    inset 0 0 0 4px black;  /* Inner black double line */
+  padding: 10px;
+  background: white;
+  text-transform: uppercase;
+  font-weight: bold;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .sub1 { color: #005eff; }    /* Bright Blue */
+    .sub2 { color: #ff6600; }    /* Orange */
+    .sub3 { color: #00cc44; }    /* Green */
+    .sub4 { color: #ff0033; }    /* Red */
+    .sub5 { color: #9900cc; }    /* Purple */
+    .swa  { color: #b30000; }    /* Black */
+    .counsel { color: 000000; } /* Dark Red */
+    .lab  { color: #009966; }    /* Teal */
+    .library { color: #666666; font-style: italic; }
+
+    .vertical-text {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 16px;
+      color: #213;
+    }
+  </style>
+</head>
+<body>
+<h3> SANJANA V POOJARY-4MW23CS135</h3>
+
+  <h2>College Time Table</h2>
+
+  <table>
+    <tr>
+      <th>Day / Time</th>
+      <th>8:30-9:30</th>
+      <th>9:30-10:30</th>
+      <th>10:30-11:30</th>
+      <th>11:30-12:30</th>
+      <th>12:30-2:00</th>
+      <th>2:00-3:00</th>
+      <th>3:00-4:00</th>
+      <th>4:00-5:00</th>
+    </tr>
+
+    <!-- Monday -->
+    <tr>
+      <td>Monday</td>
+      <td>---</td>
+      <td class="sub1">SUB1</td>
+      <td class="sub2">SUB2</td>
+      <td class="sub3">SUB3</td>
+      
+      <td rowspan="6"><div class="vertical-text">LUNCH</div></td>
+      <td class="sub4">SUB4</td>
+      <td class="sub5">SUB5</td>
+      <td class="counsel">Counselling Class</td>
+    </tr>
+
+    <!-- Tuesday -->
+    <tr>
+      <td>Tuesday</td>
+      <td class="sub1">SUB1</td>
+      <td class="sub2">SUB2</td>
+      <td class="sub3">SUB3</td>
+      <td> ---</td>
+      <td class="sub2">SUB2</td>
+      <td class="sub2">SUB2</td>
+      <td class="library">Library</td>
+    </tr>
+
+    <!-- Wednesday -->
+    <tr>
+      <td>Wednesday</td>
+      <td class="sub1">SUB1</td>
+      <td class="sub3">SUB3</td>
+      <td class="swa">SWA</td>
+      <td>---</td>
+      <td colspan="3" class="lab">LAB</td>
+          </tr>
+
+    <!-- Thursday -->
+    <tr>
+      <td>Thursday</td>
+      <td class="sub3">SUB3</td>
+      <td class="sub2">SUB2</td>
+      <td class="sub1">SUB1</td>
+      <td>---</td>
+      <td class="sub4">SUB4</td>
+      <td class="sub5">SUB5</td>
+      <td class="library">Library</td>
+    </tr>
+
+    <!-- Friday -->
+    <tr>
+      <td>Friday</td>
+      <td class="sub4">SUB4</td>
+      <td class="sub5">SUB5</td>
+      
+      <td colspan="2" class="lab">LAB</td>
+
+      <td class="sub5">SUB5</td>
+      <td class="sub4">SUB4</td>
+      <td class="library">Library</td>
+    </tr>
+
+    <!-- Saturday -->
+    <tr>
+      <td>Saturday</td>
+      <td class="sub4">SUB4</td>
+      <td class="sub5">SUB5</td>
+      <td class="sub3">SUB3</td>
+      <td class="sub2">SUB2</td>
+      <td class="sub5">SUB5</td>
+      <td class="sub5">SUB5</td>
+      <td class="library">Library</td>
+    </tr>
+  </table>
+
+</body>
+</html>
