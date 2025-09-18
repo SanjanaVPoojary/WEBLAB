@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Homepage with Heading Box</title>
+  <style>
+    /* Base reset and body styling */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8; /* default */
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Heading box */
+    .heading-box {
+      background-color: #800000; /* maroon */
+      padding: 30px 40px;
+      margin: 40px auto 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .heading-box h1 {
+      color: white; /* white text */
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    .heading-box p {
+      color: #f8f8f8;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    /* Info text */
+    .info {
+      max-width: 600px;
+      margin: 20px auto;
+      font-size: 16px;
+      line-height: 1.5;
+      padding: 0 15px;
+      color: #555;
+      text-align: center;
+    }
+
+    /* Right side vertical menu */
+    .menu {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 160px;
+      z-index: 1000;
+    }
+
+    .menu button {
+      /* Background color will be set dynamically in JS */
+      color: white; /* default text color */
+      border: none;
+      padding: 12px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+      width: 100%;
+    }
+
+    /* Hover and active states: darker or lighter shade of button bg */
+    .menu button:hover {
+      filter: brightness(0.85);
+    }
+
+    .menu button.active {
+      filter: brightness(0.65);
+    }
+
+    /* Bottom sidebar box */
+    .sidebar {
+      background-color: #4b0000; /* dark maroon */
+      color: white;
+      padding: 20px 30px;
+      margin: 30px auto 20px auto;
+      max-width: 960px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      text-align: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Style switcher styles */
+    body.style1 { background-color: #f0f4f8; color: #333; }
+    body.style2 { background-color: #fff0f5; color: #333; font-family: Verdana, sans-serif; }
+    body.style3 { background-color: #f3e5f5; color: #333; font-family: 'Courier New', monospace; }
+    body.style4 { background-color: #fff8e1; color: #333; font-family: Tahoma, sans-serif; }
+
+    body.no-style {
+      all: unset;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: initial;
+      color: initial;
+      background: initial;
+      text-align: center;
+      gap: 20px;
+      padding: 40px 20px 20px 20px;
+    }
+  </style>
+</head>
+<body class="style1">
+
+  <!-- Heading box -->
+  <div class="heading-box">
+    <h1>Welcome to my homepage</h1>
+    <p>Use the menu to select different Stylesheets</p>
+  </div>
+
+  <!-- Info below heading box -->
+  <div class="info">
+    <p>Same page, different stylesheets.</p>
+    <p>This page allows you to switch between multiple styles using CSS classes on the tag.</p>
+    <p>Click a button on the right to change the page style. The "No Stylesheet" option removes all styling.</p>
+  </div>
+
+  <!-- Menu buttons on right -->
+  <div class="menu">
+    <button data-style="style1" onclick="setStyle('style1')">Stylesheet 1</button>
+    <button data-style="style2" onclick="setStyle('style2')">Stylesheet 2</button>
+    <button data-style="style3" onclick="setStyle('style3')">Stylesheet 3</button>
+    <button data-style="style4" onclick="setStyle('style4')">Stylesheet 4</button>
+    <button data-style="no-style" onclick="setStyle('no-style')">No Stylesheet</button>
+  </div>
+
+  <!-- Bottom sidebar -->
+  <div class="sidebar">
+    This is the sidebar content at the bottom inside a dark maroon box.
+  </div>
+
+  <script>
+    function setStyle(styleName) {
+      const body = document.body;
+
+      // Clear existing classes
+      body.className = '';
+      if (styleName !== 'no-style') {
+        body.classList.add(styleName);
+      } else {
+        body.classList.add('no-style');
+      }
+
+      // Store style preference
+      localStorage.setItem('selectedStyle', styleName);
+
+      // Update active button styling
+      document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
+      const clickedButton = document.querySelector(`.menu button[data-style="${styleName}"]`);
+      if (clickedButton) {
+        clickedButton.classList.add('active');
+      }
+
+      // Update button background colors to match body's background
+      updateButtonColors();
+    }
+
+    function updateButtonColors() {
+      const bodyBg = getComputedStyle(document.body).backgroundColor;
+
+      // For better contrast, decide if text should be black or white depending on background brightness
+      function getBrightness(rgb) {
+        const result = rgb.match(/\d+/g);
+        if (!result) return 255; // default brightness
+        // formula to calculate brightness of rgb color
+        return Math.round(
+          (parseInt(result[0]) * 299 +
+           parseInt(result[1]) * 587 +
+           parseInt(result[2]) * 114) / 1000
+        );
+      }
+
+      const brightness = getBrightness(bodyBg);
+      const textColor = brightness > 150 ? '#000' : '#fff';
+
+      document.querySelectorAll('.menu button').forEach(btn => {
+        btn.style.backgroundColor = bodyBg;
+        btn.style.color = textColor;
+      });
+    }
+
+    // On page load, apply saved style or default to style1
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedStyle = localStorage.getItem('selectedStyle') || 'style1';
+      setStyle(savedStyle);
+    });
+  </script>
+
+</body>
+</html>
